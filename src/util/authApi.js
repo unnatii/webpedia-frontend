@@ -25,11 +25,11 @@ export const signin = async user => {
 
   export const checkLoggedIn = async initialState => {
     const response = await axios.get('/user');
-  //  const { user } = await response.json();
+   console.log("CHECK",response.data)
   initialState = {};
-    if (response.user) {
+    if (response.data.user) {
       initialState = {
-        Auth: response.user
+        Auth: response.data.user
       };
     }
     return initialState;
