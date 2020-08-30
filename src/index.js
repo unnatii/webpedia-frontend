@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import {checkLoggedIn} from './util/authApi'
 import App from './App';
-let initialState = {};
-const store = configureStore(initialState);
-
-
+// let initialState = {};
+// const store = configureStore(initialState);
+//   ReactDOM.render(
+//     <Provider store={store}>
+//       <BrowserRouter>
+//         <App />
+//       </BrowserRouter>
+//     </Provider>,
+//     document.getElementById("root")
+//   );
+const renderApp = preloadedState => {
+  const store = configureStore(preloadedState);
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
@@ -16,8 +25,7 @@ const store = configureStore(initialState);
     </Provider>,
     document.getElementById("root")
   );
+};
+(async () => renderApp(await checkLoggedIn()))();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 

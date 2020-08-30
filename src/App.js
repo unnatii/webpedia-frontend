@@ -1,4 +1,4 @@
-import React ,{useEffect}from 'react';
+import React,{useEffect} from 'react';
 import {
   Switch
 } from "react-router-dom";
@@ -8,15 +8,14 @@ import Home from './components/home'
 import Protected from './hoc/protected'
 import RegisterRoute from './hoc/register'
 import { connect } from "react-redux";
-import {isSigned} from './store/actions/actions'
-import { issigned } from './util/authApi';
+//import { checkLoggedIn } from './util/authApi';
 
 
 const  App=(props)=> {
 
-  useEffect(()=>{
-       issigned();
-  },[])
+  // useEffect(()=>{
+  //      issigned();
+  // },[])
   return (
     <Switch>
       <RegisterRoute path="/signup" component={Signup}  auth={props.Session} >        
@@ -32,8 +31,8 @@ const  App=(props)=> {
 const mapStatesToProps = state => ({
       Session:state.Auth.userId
 });
-const mapDispatchToProps = dispatch => ({
-  issigned: () => dispatch(isSigned())
-});
-export default connect(mapStatesToProps,mapDispatchToProps)(App);
+// const mapDispatchToProps = dispatch => ({
+//   issigned: () => dispatch(isSigned())
+// });
+export default connect(mapStatesToProps,null)(App);
 

@@ -33,12 +33,12 @@ export const signOut = () => async dispatch => {
     // todo: handle errors
   };
 
-  export const isSigned = () => async dispatch => {
-    const response = await issigned();
-    const data = await response.data;
-  if (response) {
-      return dispatch(receiveCurrentUser(data));
-    }
+  // export const isSigned = () => async dispatch => {
+  //   const response = await issigned();
+  //   const data = await response.data;
+  // if (response) {
+  //     return dispatch(receiveCurrentUser(data));
+  //   }
    // return dispatch(receiveErrors(data));
     // todo: handle errors
-  };
+  //};
