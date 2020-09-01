@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from "react-redux";
-import {signOut} from '../store/actions/actions'
+import {signOutAction} from '../redux/actions/actions'
 
 
 const home = (props) => {
     const handleSignOut=()=>{
-        props.signout();
+        props.signOut();
     }
     return ( <div>
         Welcome {props.session}!
@@ -13,11 +13,11 @@ const home = (props) => {
     </div> );
 }
  
-const mapStateToProps = ({ Auth }) => ({
-    session:Auth.email
+const mapStateToProps = ({ auth }) => ({
+    session:auth.email
   });
 
 const mapDispatchToProps = dispatch => ({
-    signout: () => dispatch(signOut())
+    signOut: () => dispatch(signOutAction())
   });
 export default connect(mapStateToProps,mapDispatchToProps)(home);

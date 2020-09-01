@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -13,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from "react-redux";
-import {signIn} from '../store/actions/actions'
+import {signInAction} from '../redux/actions/actions'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -59,7 +57,7 @@ const SignIn=(props)=> {
       email: email,
       password: password
     };
-   props.signin(user);
+   props.signIn(user);
   }
 
 const handleOnChange = e =>{
@@ -107,10 +105,10 @@ const handleOnChange = e =>{
             autoComplete="current-password"
             onChange={handleOnChange}
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             fullWidth
             variant="contained"
@@ -122,7 +120,7 @@ const handleOnChange = e =>{
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/reset" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
@@ -144,6 +142,6 @@ const handleOnChange = e =>{
 //   errors
 // });
 const mapDispatchToProps = dispatch => ({
-  signin: user => dispatch(signIn(user))
+  signIn: user => dispatch(signInAction(user))
 });
 export default connect(null, mapDispatchToProps)(SignIn);
