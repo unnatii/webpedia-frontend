@@ -1,32 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Cards from '../components/cards'
-
-
-
+import React from "react";
+import PropTypes from "prop-types";
+import { Grid, Typography, Divider } from "@material-ui/core";
+import Cards from "../components/cards";
 
 export default function Main(props) {
+	const { title } = props;
 
-  const {  title } = props;
+	return (
+		<Grid item xs={12} md={8}>
+			<Typography variant="h6" gutterBottom>
+				{title}
+			</Typography>
 
-  return (
-    <Grid item xs={12} md={8}>
-      <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>
-	  
-        
-      <Divider />
-      <Cards/>
-	  <Cards/>
-	  <Cards/>
-    </Grid>
-  );
+			<Divider />
+			<Cards />
+			<Cards />
+			<Cards />
+		</Grid>
+	);
 }
 
 Main.propTypes = {
-  title: PropTypes.string,
+	title: PropTypes.string,
 };

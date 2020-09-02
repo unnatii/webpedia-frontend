@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-//import IconButton from '@material-ui/core/IconButton';
-//import SearchIcon from '@material-ui/icons/Search';
+import {
+	makeStyles,
+	Typography,
+	Button,
+	Toolbar,
+	Link,
+} from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
 	toolbar: {
@@ -28,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
 	const classes = useStyles();
-	const { sections, title ,handleSignOut} = props;
+	const { sections, title, handleSignOut } = props;
 
 	return (
 		<React.Fragment>
 			<Toolbar className={classes.toolbar}>
 				<Button size="small">
-				<CreateIcon />
-					Write a Question	
+					<CreateIcon />
+					Write a Question
 				</Button>
 				<Typography
 					component="h2"
@@ -51,7 +51,9 @@ export default function Header(props) {
 				<Button size="small">Users</Button>
 				<Button size="small">Bookmarks</Button>
 				<Button size="small">Settings</Button>
-				<Button size="small" onClick={handleSignOut}>Sign out</Button>
+				<Button size="small" onClick={handleSignOut}>
+					Sign out
+				</Button>
 			</Toolbar>
 			<Toolbar
 				component="nav"
