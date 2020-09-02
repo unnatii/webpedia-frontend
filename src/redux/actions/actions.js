@@ -13,8 +13,8 @@ const receiveCurrentUser = user => ({
 
 export const signInAction = user => async dispatch => {
     const response = await signInUser(user);
-    const data = await response.data;
-   
+	const data = await response.data;
+	console.log(data)
   if (response.status===200) {
       return dispatch(receiveCurrentUser(data));
     }

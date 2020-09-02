@@ -21,13 +21,14 @@ export const signInUser = async user => {
   }
 
   export const checkLoggedIn = async initialState => {
-    const response = await axios.get(CHECKAUTH_URL);
+	const response = await axios.get(CHECKAUTH_URL);	
   initialState = {};
-    if (response.data.user) {
+    if (response.data) {
+		console.log(response.data)
       initialState = {
-        Auth: response.data.user
+        auth: response.data
       };
-    }
+	}
     return initialState;
   };
 

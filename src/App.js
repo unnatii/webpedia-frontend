@@ -20,6 +20,7 @@ const  App=(props)=> {
       <AuthRoute path="/signin" component={SignInPage}  auth={props.authenticated} >
       </AuthRoute>
       <Protected path="/home"  component={HomePage}  auth={props.authenticated} ></Protected>
+	  
     </Switch>
 
     
