@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom'
 import {
 	makeStyles,
 	Typography,
 	Button,
 	Toolbar,
-	Link,
 } from "@material-ui/core";
 import CreateIcon from "@material-ui/icons/Create";
 
@@ -28,15 +28,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
 	const classes = useStyles();
-	const { sections, title, handleSignOut } = props;
+	const {  title, handleSignOut, auth } = props;
 
 	return (
 		<React.Fragment>
 			<Toolbar className={classes.toolbar}>
+				{auth?<Link to={"/home/new"}>
 				<Button size="small">
 					<CreateIcon />
 					Write a Question
-				</Button>
+				</Button></Link>:null}
 				<Typography
 					component="h2"
 					variant="h5"
@@ -47,32 +48,17 @@ export default function Header(props) {
 				>
 					{title}
 				</Typography>
-
-				<Button size="small">Users</Button>
-				<Button size="small">Bookmarks</Button>
-				<Button size="small">Settings</Button>
+			{auth?<span>
+				<Link to={"/home"}><Button size="small">Home</Button></Link>
+				<Link to={"/users"}><Button size="small">Users</Button></Link>
+				<Link to={"/bookmarks"}><Button size="small">Bookmarks</Button></Link>
+				<Link to={""}><Button size="small">Settings</Button></Link>
 				<Button size="small" onClick={handleSignOut}>
 					Sign out
 				</Button>
+				</span>:null}
 			</Toolbar>
-			<Toolbar
-				component="nav"
-				variant="dense"
-				className={classes.toolbarSecondary}
-			>
-				{sections.map((section) => (
-					<Link
-						color="inherit"
-						noWrap
-						key={section.title}
-						variant="body2"
-						href={section.url}
-						className={classes.toolbarLink}
-					>
-						{section.title}
-					</Link>
-				))}
-			</Toolbar>
+		
 		</React.Fragment>
 	);
 }

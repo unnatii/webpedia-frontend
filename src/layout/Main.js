@@ -4,18 +4,16 @@ import { Grid, Typography, Divider } from "@material-ui/core";
 import Cards from "../components/cards";
 
 export default function Main(props) {
-	const { title } = props;
+	const { title, allPosts } = props;
+	
 
 	return (
 		<Grid item xs={12} md={8}>
 			<Typography variant="h6" gutterBottom>
 				{title}
 			</Typography>
-
 			<Divider />
-			<Cards />
-			<Cards />
-			<Cards />
+			{allPosts.map((post, index) => <Cards key={index} post={post} />)}
 		</Grid>
 	);
 }

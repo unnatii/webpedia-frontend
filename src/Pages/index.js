@@ -3,4 +3,6 @@ export {default as SignUpPage } from './signup'
 export {default as SignInPage } from './signin'
 export {default as ResetPasswordPage} from './resetPassword'
 export {default as NewPasswordPage} from './newPassword'
- 
+export {default as NewQues} from './newQues'
+export {default as Bookmarks} from './bookmarks'
+export {default as allUsers} from './users'

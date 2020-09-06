@@ -1,89 +1,90 @@
-import React from "react";
-import { Container, Grid, CssBaseline } from "@material-ui/core";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import TwitterIcon from "@material-ui/icons/Twitter";
+import React,{useEffect,useState} from "react";
+import {  Grid,Toolbar	,Link ,makeStyles,Button} from "@material-ui/core";
 import MainFeaturedPost from "../components/MainFeaturedPost";
-import { Main, Sidebar, Header, Footer } from "../layout";
-import { connect } from "react-redux";
-import { signOutAction } from "../redux/actions/actions";
+import { Main, Sidebar} from "../layout";
+import {getAllPosts,getAllPostsTagwise} from '../util/postApi'
+import { Route } from "react-router-dom";
+
+
 
 const sections = [
-	{ title: "Technology", url: "#" },
-	{ title: "Design", url: "#" },
-	{ title: "Culture", url: "#" },
-	{ title: "Business", url: "#" },
-	{ title: "Politics", url: "#" },
-	{ title: "Opinion", url: "#" },
-	{ title: "Science", url: "#" },
-	{ title: "Health", url: "#" },
-	{ title: "Style", url: "#" },
-	{ title: "Travel", url: "#" },
+	{ title: "All",value:"All" },
+	{ title: "Technology",value:"Technology" },
+	{ title: "Design" ,value:"Design" },
+	{ title: "Culture" ,value:"Culture" },
+	{ title: "Business" ,value:"Business" },
+	{ title: "Politics" ,value:"Politics" },
+	{ title: "Opinion" ,value:"Opinion" },
+	{ title: "Science",value:"Science"  },
+	{ title: "Health",value:"Health"  },
+	{ title: "Style" ,value:"Style" },
+	{ title: "Travel",value:"Travel"  }
 ];
+const useStyles = makeStyles((theme) => ({
+	
+	toolbarSecondary: {
+		justifyContent: "space-between",
+		overflowX: "auto",
+	},
+	toolbarLink: {
+		padding: theme.spacing(1),
+		flexShrink: 0,
+	},
+}));
+export default function Home(props) {
+	const classes = useStyles();
 
-const sidebar = {
-	title: "About",
-	description:
-		"Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
-	archives: [
-		{ title: "March 2020", url: "#" },
-		{ title: "February 2020", url: "#" },
-		{ title: "January 2020", url: "#" },
-		{ title: "November 1999", url: "#" },
-		{ title: "October 1999", url: "#" },
-		{ title: "September 1999", url: "#" },
-		{ title: "August 1999", url: "#" },
-		{ title: "July 1999", url: "#" },
-		{ title: "June 1999", url: "#" },
-		{ title: "May 1999", url: "#" },
-		{ title: "April 1999", url: "#" },
-	],
-	social: [
-		{ name: "GitHub", icon: GitHubIcon },
-		{ name: "Twitter", icon: TwitterIcon },
-		{ name: "Facebook", icon: FacebookIcon },
-	],
-};
+	const [allPosts,setAllPosts]=useState([])
+	const [Tag,setTag]=useState()
 
-const home = (props) => {
-	const handleSignOut = () => {
-		props.signOut();
-	};
+	useEffect(async() => {
+	const all=await	getAllPosts();
+	   setAllPosts(all);
+	   setTag("All")
+	  },[]);
+
+	  const changeCategory =async(tag)=>{
+		  if(tag==="All"){
+			const all=await	getAllPosts();
+			setAllPosts(all);
+			setTag("All")
+		  }else{
+			const selected=await getAllPostsTagwise(tag)
+			setAllPosts(selected);
+			setTag(tag)
+		  }
+	  }
 
 	return (
 		<React.Fragment>
-			<CssBaseline />
-			<Container maxWidth="lg">
-				<Header
-					title="Webpedia"
-					sections={sections}
-					handleSignOut={handleSignOut}
-				/>
-				<main>
+		
+			<Toolbar
+				component="nav"
+				variant="dense"
+				className={classes.toolbarSecondary}
+			>
+				{sections.map((section) => (
+				<Button size="small"
+						color="inherit"
+						noWrap
+						key={section.title}
+						variant="body2"
+						onClick={() => changeCategory(section.value)}
+						className={classes.toolbarLink}
+					>
+						{section.title}
+					</Button>
+				))}
+			</Toolbar>
+				
 					<MainFeaturedPost />
 
 					<Grid container spacing={5}>
-						<Main title="Top posts" />
-						<Sidebar
-							title={sidebar.title}
-							description={sidebar.description}
-							archives={sidebar.archives}
-							social={sidebar.social}
-						/>
+						<Main title={`${Tag} Posts`} allPosts={allPosts} />
+						<Sidebar description="fdceccdsdcdfcvdf dc" />
 					</Grid>
-				</main>
-			</Container>
-			<Footer title="Footer" description="Created by Unnatii Tibrewal" />
+
 		</React.Fragment>
 	);
 };
 
-const mapStateToProps = ({ auth }) => ({
-	session: auth.email,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-	signOut: () => dispatch(signOutAction()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(home);

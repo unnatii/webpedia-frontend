@@ -6,7 +6,6 @@ import {
 	TextField,
 	Link,
 	Grid,
-	Box,
 	makeStyles,
 	Typography,
 	Container,
@@ -16,18 +15,7 @@ import { connect } from "react-redux";
 import { signInAction } from "../redux/actions/actions";
 
 
-function Copyright() {
-	return (
-		<Typography variant="body2" color="textSecondary" align="center">
-			{"Copyright © "}
-			<Link color="inherit" href="https://material-ui.com/">
-				Webpedia
-			</Link>{" "}
-			{new Date().getFullYear()}
-			{"."}
-		</Typography>
-	);
-}
+
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -134,9 +122,7 @@ const SignIn = (props) => {
 					</Grid>
 				</form>
 			</div>
-			<Box mt={8}>
-				<Copyright />
-			</Box>
+		
 		</Container>
 	);
 };

@@ -24,9 +24,9 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function SimpleCard() {
+export default function SimpleCard(props) {
 	const classes = useStyles();
-
+	const {post } = props;
 	return (
 		<Card className={classes.root}>
 			<CardContent>
@@ -38,10 +38,10 @@ export default function SimpleCard() {
 					User name
 				</Typography>
 				<Typography variant="h5" component="h2">
-					Question
+					{post.title}
 				</Typography>
 				<Typography className={classes.pos} color="textSecondary">
-					date
+					{post.date.substring(0,10)} 
 				</Typography>
 			</CardContent>
 			<CardActions>
