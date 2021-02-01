@@ -1,0 +1,6 @@
+export const SIGNOUT_URL="/user/signout"
+export const SIGNIN_URL="/user/signin"
+export const SIGNUP_URL="/user/signup"
+export const CHECKAUTH_URL="/user"
+export const FORGOT_PASSWORD_URL="/user/forgotPassword"
+export const RESET_PASSWORD_URL="/user/resetPassword"
